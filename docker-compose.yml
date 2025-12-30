@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ecommerce_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: ecommerce
+    ports:
+      - "5420:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U admin -d ecommerce"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: ecommerce_api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - JwtConfig__Secret=08abb28698bd356ec6728050cee5da95214a0676dba93eaed8e00f7da2987f09
+      - JwtConfig__Issuer=ECommerce_Backend
+      - JwtConfig__Audience=ECommerce_Web
+      - JwtConfig__AccessTokenExpiration=30
+      - ConnectionStrings__PostgreSqlConnection=Host=postgres;Port=5432;Database=ecommerce;Username=admin;Password=admin123
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+
+volumes:
+  postgres_data:
