@@ -44,7 +44,7 @@ namespace ECommerce.API.Controllers
             return CreateResult(response);
         }
 
-        [HttpGet("getallnew")]
+        [HttpGet("getall/new")]
         public async Task<IActionResult> GetAllProductsNew()
         {
             var response = await _productService.GetAllAsync(
