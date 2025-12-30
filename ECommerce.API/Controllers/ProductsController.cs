@@ -44,6 +44,17 @@ namespace ECommerce.API.Controllers
             return CreateResult(response);
         }
 
+        [HttpGet("getallnew")]
+        public async Task<IActionResult> GetAllProductsNew()
+        {
+            var response = await _productService.GetAllAsync(
+                predicate: x => true,
+                orderBy: x => x.OrderByDescending(y => y.CreatedAt),
+                includeCategories: true
+            );
+            return CreateResult(response);
+        }
+
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

@@ -26,7 +26,7 @@ WORKDIR /src/ECommerce.API
 RUN dotnet restore
 
 # Uygulamayı production için hazırla
-RUN dotnet publish -c Release -o /app/publish --no-restore
+RUN dotnet publish -c Release -o /publish --no-restore
 
 # 2.STAGE
 # Burası "runtime stage". Burada Asp.Net Core 10.0 Runtime'ı ilgili adresten indir

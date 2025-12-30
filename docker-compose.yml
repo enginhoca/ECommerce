@@ -27,7 +27,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
-      - JwtConfig__Secret=08abb28698bd356ec6728050cee5da95214a0676dba93eaed8e00f7da2987f09
+      - JwtConfig__Secret=8U1koXxr4dKZMovyjzSEtlImW5qflqwsUkyYVSiM57Nm1qvyYJ9m+Hu15vWdRZXFQelNfiZfGAwCVHIW0H8KsQ==
       - JwtConfig__Issuer=ECommerce_Backend
       - JwtConfig__Audience=ECommerce_Web
       - JwtConfig__AccessTokenExpiration=30
